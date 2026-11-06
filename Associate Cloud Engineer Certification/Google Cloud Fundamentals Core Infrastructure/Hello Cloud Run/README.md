@@ -1,4 +1,7 @@
-# How to Run
+## Estimated Time:
+~2-3 minutes (Cloud Build container build takes ~1-2 minutes)
+
+## How to Run
 
 1. Create the script file in Cloud Shell:
    ```bash

@@ -1,5 +1,8 @@
 ## Not tested: this particular one may not work.
-# How to Run
+## Estimated Time:
+~1-2 minutes
+
+## How to Run
 
 1. Create the script file in Cloud Shell:
    ```bash

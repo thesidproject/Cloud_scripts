@@ -1,4 +1,7 @@
-# How to Run
+## Estimated Time:
+~4-6 minutes (Cloud SQL provisioning takes ~3-5 minutes)
+
+## How to Run
 
 1. Create the script file in Cloud Shell:
    ```bash
