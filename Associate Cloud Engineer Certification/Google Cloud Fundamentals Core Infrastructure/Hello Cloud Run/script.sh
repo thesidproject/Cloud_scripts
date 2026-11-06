@@ -41,7 +41,7 @@ gcloud config set compute/region "$REGION" --quiet
 echo "Enabling Cloud Run, Artifact Registry, and Cloud Build APIs..."
 gcloud services enable run.googleapis.com \
     artifactregistry.googleapis.com \
-    cloudbuild.googleapis.com --quiet
+    cloudbuild.googleapis.com --quiet 2>/dev/null || true
 
 # ==============================================================================
 # 4. TASK 2: WRITE SAMPLE APPLICATION

@@ -33,7 +33,7 @@ gcloud config set compute/zone "$ZONE" --quiet
 
 # Ensure Compute Engine API is active
 echo "Ensuring Compute Engine API is active..."
-gcloud services enable compute.googleapis.com --quiet
+gcloud services enable compute.googleapis.com --quiet 2>/dev/null || true
 
 # Ensure HTTP firewall rule exists
 echo "Verifying HTTP firewall access (port 80)..."

@@ -30,7 +30,7 @@ gcloud config set project "$PROJECT_ID" --quiet
 
 # Enable required APIs
 echo "Enabling IAP and Network Management APIs..."
-gcloud services enable iap.googleapis.com networkmanagement.googleapis.com --quiet
+gcloud services enable iap.googleapis.com networkmanagement.googleapis.com --quiet 2>/dev/null || true
 
 # ==============================================================================
 # 3. TASK 1: EXPLORE AND DELETE DEFAULT NETWORK & FIREWALL RULES

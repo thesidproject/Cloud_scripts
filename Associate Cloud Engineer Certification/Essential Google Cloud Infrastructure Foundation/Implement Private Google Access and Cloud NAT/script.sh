@@ -36,7 +36,7 @@ gcloud config set compute/zone "$ZONE" --quiet
 
 # Enable required APIs
 echo "Ensuring required APIs are active..."
-gcloud services enable compute.googleapis.com storage.googleapis.com iap.googleapis.com --quiet
+gcloud services enable compute.googleapis.com storage.googleapis.com iap.googleapis.com --quiet 2>/dev/null || true
 
 # ==============================================================================
 # 3. TASK 1: CREATE CUSTOM VPC, SUBNET, FIREWALL, AND ISOLATED VM

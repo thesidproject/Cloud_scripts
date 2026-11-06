@@ -38,7 +38,7 @@ gcloud config set compute/zone "$ZONE" --quiet
 
 # Enable required Google APIs
 echo "Ensuring required APIs are enabled..."
-gcloud services enable compute.googleapis.com sqladmin.googleapis.com storage.googleapis.com --quiet
+gcloud services enable compute.googleapis.com sqladmin.googleapis.com storage.googleapis.com --quiet 2>/dev/null || true
 
 # Ensure firewall allows HTTP and SSH traffic
 echo "Verifying firewall access for HTTP and SSH..."
