@@ -69,7 +69,7 @@ if ! gcloud compute instances describe mynet-r2-vm --zone="$ZONE_2" &>/dev/null;
 fi
 
 # ==============================================================================
-# FLASHY SUCCESS BANNER
+# DISPLAY COMPLETION STATUS
 # ==============================================================================
 GREEN='\033[1;32m'
 CYAN='\033[1;36m'

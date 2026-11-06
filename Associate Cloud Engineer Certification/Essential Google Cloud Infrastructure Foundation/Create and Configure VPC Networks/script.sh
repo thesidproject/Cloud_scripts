@@ -8,8 +8,8 @@ set -eo pipefail
 # ==============================================================================
 export REGION_1="${REGION_1:-us-east1}"
 export ZONE_1="${ZONE_1:-us-east1-c}"
-export REGION_2="${REGION_2:-europe-west1}"
-export ZONE_2="${ZONE_2:-europe-west1-d}"
+export REGION_2="${REGION_2:-}"
+export ZONE_2="${ZONE_2:-}"
 
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
@@ -18,6 +18,20 @@ export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSH
 if [ -z "$PROJECT_ID" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
+fi
+
+# Auto-detect allowed secondary region from org policy if not explicitly provided
+if [ -z "$REGION_2" ]; then
+    if gcloud org-policies describe constraints/gcp.resourceLocations --project="$PROJECT_ID" 2>/dev/null | grep -q "in:us-east1-locations"; then
+        export REGION_2="us-east1"
+        export ZONE_2="us-east1-b"
+    else
+        export REGION_2="europe-west1"
+        export ZONE_2="europe-west1-d"
+    fi
+fi
+if [ -z "$ZONE_2" ]; then
+    export ZONE_2="${REGION_2}-b"
 fi
 
 echo "=================================================="
@@ -256,7 +270,7 @@ echo ""
 echo "VM Instances:"
 gcloud compute instances list --sort-by=ZONE
 
-# Flashy Success Banner
+# Display completion status
 GREEN='\033[1;32m'
 CYAN='\033[1;36m'
 YELLOW='\033[1;33m'

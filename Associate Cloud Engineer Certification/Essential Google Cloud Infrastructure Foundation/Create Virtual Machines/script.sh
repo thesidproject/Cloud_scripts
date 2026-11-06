@@ -147,7 +147,7 @@ echo "=================================================="
 gcloud compute instances list --filter="name:( utility-vm utility-wm utility-cm )" \
     --format="table(name, zone, machineType, status, networkInterfaces[0].accessConfigs[0].natIP:label=EXTERNAL_IP)"
 
-# Flashy Success Banner (No emojis)
+# Display completion status
 GREEN='\033[1;32m'
 CYAN='\033[1;36m'
 YELLOW='\033[1;33m'

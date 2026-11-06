@@ -1,0 +1,123 @@
+# ==============================================================================
+# Git Ignore Rules for Cloud Scripts Repository
+# ==============================================================================
+
+# --- Cloud Credentials, Secrets & Keys (High Security) ---
+*.pem
+*.key
+*.pkcs12
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+*.pub
+*.secret
+*.secrets
+*service_account*.json
+*service-account*.json
+credentials*.json
+client_secret*.json
+
+# Environment and Secret Configurations
+.env
+.env.*
+!.env.example
+*.env
+
+# Local Cloud SDK / Auth Caches
+.gcloud/
+.config/gcloud/
+legacy_credentials/
+access_tokens.db
+
+# --- Infrastructure as Code State & Plans ---
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform/
+.terraform.lock.hcl
+
+# --- Scratch & Temporary Scripts ---
+scratch/
+tmp/
+temp/
+*.tmp
+*.temp
+test.ps1
+test.sh
+test.py
+test.js
+*.bak
+*.swp
+*~
+
+# --- Logs & Process Outputs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Python Artifacts & Virtual Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Node / JavaScript Artifacts ---
+node_modules/
+.npm/
+
+# --- Operating System Files ---
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+
+# --- IDEs & Code Editors ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# --- AI Assistants & Local Tool Caches ---
+.gemini/
+.antigravity/
