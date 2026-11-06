@@ -119,10 +119,20 @@ echo "DEPLOYMENT VERIFICATION SUMMARY"
 echo "=================================================="
 gcloud compute instances describe "$INSTANCE_NAME" --zone="$ZONE" --format="table(name, status, machineType, networkInterfaces[0].accessConfigs[0].natIP:label=EXTERNAL_IP)"
 
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+YELLOW='\033[1;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
 if [ "$HTTP_OK" = true ]; then
-    echo ""
-    echo "SUCCESS: Apache/LAMP stack is live at http://$VM_IP"
-    echo "You can now safely click 'Check My Progress' for all tasks!"
+    echo -e "\n${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}║${GREEN}              [✓] LAB COMPLETED SUCCESSFULLY! [✓]                  ${CYAN}║${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}║${YELLOW}     You can now safely click 'Check My Progress' for all tasks!   ${CYAN}║${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}\n"
 else
     echo ""
     echo "Notice: Web server is still starting up. Please verify http://$VM_IP in your browser."

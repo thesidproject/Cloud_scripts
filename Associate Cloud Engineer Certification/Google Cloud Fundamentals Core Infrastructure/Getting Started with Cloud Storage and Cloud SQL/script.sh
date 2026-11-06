@@ -235,8 +235,20 @@ for i in {1..6}; do
     sleep 5
 done
 
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+YELLOW='\033[1;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
 if echo "$HTTP_RESPONSE" | grep -q "Connected successfully"; then
-    echo "SUCCESS: All lab requirements are satisfied! Click 'Check My Progress'."
+    echo -e "\n${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}║${GREEN}              [✓] LAB COMPLETED SUCCESSFULLY! [✓]                  ${CYAN}║${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}║${YELLOW}     You can now safely click 'Check My Progress' for all tasks!   ${CYAN}║${NC}"
+    echo -e "${CYAN}║                                                                   ║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}\n"
 else
     echo "Notice: Output received from http://$VM_IP/index.php:"
     echo "$HTTP_RESPONSE"

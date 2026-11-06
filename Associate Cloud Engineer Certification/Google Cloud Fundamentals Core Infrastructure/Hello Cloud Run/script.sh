@@ -137,13 +137,24 @@ echo "RUNNING VERIFICATION"
 echo "=================================================="
 SERVICE_URL=$(gcloud run services describe "$SERVICE_NAME" --region="$LOCATION" --format="value(status.url)" 2>/dev/null || true)
 
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+YELLOW='\033[1;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
 if [ -n "$SERVICE_URL" ]; then
     echo "Service URL: $SERVICE_URL"
     RESPONSE=$(curl -s "$SERVICE_URL" || true)
     echo "Response: $RESPONSE"
     if echo "$RESPONSE" | grep -q "Hello World!"; then
-        echo "SUCCESS: Cloud Run service is live and returned 'Hello World!'."
-        echo "You can now safely click 'Check My Progress' for all tasks."
+        echo -e "\n${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+        echo -e "${CYAN}║                                                                   ║${NC}"
+        echo -e "${CYAN}║${GREEN}              [✓] LAB COMPLETED SUCCESSFULLY! [✓]                  ${CYAN}║${NC}"
+        echo -e "${CYAN}║                                                                   ║${NC}"
+        echo -e "${CYAN}║${YELLOW}     You can now safely click 'Check My Progress' for all tasks!   ${CYAN}║${NC}"
+        echo -e "${CYAN}║                                                                   ║${NC}"
+        echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}\n"
     fi
 else
     echo "Warning: Unable to fetch service URL automatically. Please verify via Cloud Console."

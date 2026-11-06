@@ -128,4 +128,16 @@ echo "Persistent Environment Variables:"
 echo "INFRACLASS_PROJECT_ID : $INFRACLASS_PROJECT_ID"
 echo "INFRACLASS_REGION     : $INFRACLASS_REGION"
 
-echo "SUCCESS: All lab requirements are satisfied! Click 'Check My Progress'."
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+YELLOW='\033[1;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+echo -e "\n${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}║${GREEN}              [✓] LAB COMPLETED SUCCESSFULLY! [✓]                  ${CYAN}║${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}║${YELLOW}     You can now safely click 'Check My Progress' for all tasks!   ${CYAN}║${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}\n"

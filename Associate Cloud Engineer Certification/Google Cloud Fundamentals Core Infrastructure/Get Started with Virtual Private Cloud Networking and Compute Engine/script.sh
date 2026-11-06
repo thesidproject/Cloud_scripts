@@ -68,4 +68,19 @@ if ! gcloud compute instances describe mynet-r2-vm --zone="$ZONE_2" &>/dev/null;
         --network=mynetwork --quiet
 fi
 
-echo "Lab setup completed successfully!"
+# ==============================================================================
+# FLASHY SUCCESS BANNER
+# ==============================================================================
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+YELLOW='\033[1;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+echo -e "\n${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}║${GREEN}              [✓] LAB COMPLETED SUCCESSFULLY! [✓]                  ${CYAN}║${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}║${YELLOW}     You can now safely click 'Check My Progress' for all tasks!   ${CYAN}║${NC}"
+echo -e "${CYAN}║                                                                   ║${NC}"
+echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}\n"
