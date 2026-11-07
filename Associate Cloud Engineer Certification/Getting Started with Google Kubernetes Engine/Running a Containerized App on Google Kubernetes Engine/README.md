@@ -1,0 +1,22 @@
+# Running a Containerized App on Google Kubernetes Engine
+
+## Estimated Time: 8 minutes
+
+## How to Run
+
+1. Create the script file in Cloud Shell:
+   ```bash
+   nano script.sh
+   ```
+###  (Paste the script code from VS Code, then press Ctrl+S to save, and Ctrl+X to exit)
+
+2. Make it executable and run it:
+   ```bash
+   chmod +x script.sh
+   ./script.sh
+   ```
+
+3. *(Optional)* Override zone inline if assigned a different location:
+   ```bash
+   ZONE="us-west1-c" ./script.sh
+   ```
