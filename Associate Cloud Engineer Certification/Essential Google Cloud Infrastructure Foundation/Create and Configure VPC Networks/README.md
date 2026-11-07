@@ -1,6 +1,6 @@
 # THIS ONE IS NOT TESTED
 
-## Estimated Time: 7 minutes
+## Estimated Time: 10 minutes
 
 ## How to Run
 

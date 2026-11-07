@@ -1,4 +1,4 @@
-## Estimated Time: 2 minutes
+## Estimated Time: 4 minutes
 
 > **Note for Task 1:** In the Google Cloud Console, navigate to **Marketplace > Search "LAMP Stack on Debian12" (by Apps4Rent LLC) > Click Get Started > Deploy** (Zone: `us-central1-b`, Series: `E2`, Machine type: `e2-medium`). This script verifies the deployment, checks firewall rules, and validates the HTTP web server.
 

@@ -1,4 +1,4 @@
-## Estimated Time: 3 minutes
+## Estimated Time: 5 minutes
 
 ## How to Run
 
