@@ -1,5 +1,4 @@
-## Estimated Time:
-~4-6 minutes (Cloud SQL provisioning takes ~3-5 minutes)
+## Estimated Time: 6 minutes
 
 ## How to Run
 

@@ -1,6 +1,5 @@
 ## Not tested: this particular one may not work.
-## Estimated Time:
-~1-2 minutes
+## Estimated Time: 2 minutes
 
 ## How to Run
 

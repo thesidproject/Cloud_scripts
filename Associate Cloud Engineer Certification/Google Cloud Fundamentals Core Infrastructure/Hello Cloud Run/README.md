@@ -1,5 +1,4 @@
-## Estimated Time:
-~2-3 minutes (Cloud Build container build takes ~1-2 minutes)
+## Estimated Time: 3 minutes
 
 ## How to Run
 

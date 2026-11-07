@@ -1,7 +1,6 @@
 # THIS ONE IS NOT TESTED
 
-## Estimated Time:
-~5-7 minutes (creating 3 VPC networks, 8 firewall rules, and 4 VM instances across two continents)
+## Estimated Time: 7 minutes
 
 ## How to Run
 

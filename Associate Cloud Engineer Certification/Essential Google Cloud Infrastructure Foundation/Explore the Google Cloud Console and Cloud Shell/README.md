@@ -1,5 +1,4 @@
-## Estimated Time:
-~30-45 seconds
+## Estimated Time: 1 minute
 
 > **Note for Task 1:** It is best to create the first bucket manually in the Google Cloud Console (**Cloud Storage > Buckets > Create**, enter a unique name and keep all defaults). The script will automatically detect your bucket and complete all remaining tasks.
 

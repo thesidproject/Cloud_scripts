@@ -1,5 +1,4 @@
-## Estimated Time:
-~3-4 minutes (provisions VM with attached 50GB SSD, reserves static IP, formats disk, installs Minecraft, and schedules backups)
+## Estimated Time: 4 minutes
 
 ## How to Run
 

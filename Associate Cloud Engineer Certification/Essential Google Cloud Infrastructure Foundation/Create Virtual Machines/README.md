@@ -1,5 +1,4 @@
-## Estimated Time:
-~3-4 minutes (provisions 3 VM instances in parallel: Debian with no external IP, Windows Server 2025 on SSD, and Custom E2 VM)
+## Estimated Time: 4 minutes
 
 ## How to Run
 
