@@ -1,7 +1,7 @@
 ## Estimated Time: 5 minutes
 
 > [!WARNING]
-> **Status: Currently Not Working**
+> **Status: Probably Not Working**
 > This lab does not have automated "Check my progress" checkpoints and is marked to be completed later.
 
 > [!NOTE]
