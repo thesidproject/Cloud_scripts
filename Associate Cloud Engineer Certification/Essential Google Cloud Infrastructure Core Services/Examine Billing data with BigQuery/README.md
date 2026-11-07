@@ -1,3 +1,5 @@
+﻿# Examine Billing data with BigQuery
+
 ## Estimated Time: 3 minutes
 
 ## How to Run
