@@ -3,7 +3,7 @@ set -eo pipefail
 START_TIME=$(date +%s)
 
 # ==============================================================================
-# 1. USER CONFIGURATIONS
+# 1. USER CONFIGURATIONS & ENVIRONMENT DEFAULTS
 # Edit these variables if your lab assigns different values.
 # Override inline: REGION="us-west1" ZONE="us-west1-b" ./script.sh
 # ==============================================================================
@@ -19,9 +19,6 @@ export VM_NAME="${VM_NAME:-terraform}"
 export IMAGE="${IMAGE:-debian-cloud/debian-12}"
 export AUTO_DESTROY="${AUTO_DESTROY:-false}"
 
-# ==============================================================================
-# 2. DYNAMIC ENVIRONMENT SETUP
-# ==============================================================================
 _DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
 export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
 if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
@@ -29,7 +26,7 @@ if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     exit 1
 fi
 
-# Color definitions
+# Terminal colors
 GREEN='\033[1;32m'
 CYAN='\033[1;36m'
 YELLOW='\033[1;33m'
@@ -53,27 +50,40 @@ gcloud config set compute/zone "$ZONE" --quiet
 gcloud services enable compute.googleapis.com --quiet
 
 # ==============================================================================
-# TASK 1: Set up Terraform and Cloud Shell
+# TASK 2: Set up Terraform and Cloud Shell
 # ==============================================================================
 echo ""
-echo ">>> [Task 1] Verifying Terraform installation..."
-if ! command -v terraform >/dev/null 2>&1; then
-    echo "Installing Terraform CLI..."
-    cat << 'EOF' > ~/.customize_environment
+echo "=================================================="
+echo ">>> [Task 2] Configuring ~/.customize_environment and Terraform CLI..."
+echo "=================================================="
+
+# Ensure HashiCorp repository key and source list persist across Cloud Shell sessions
+cat << 'EOF' > ~/.customize_environment
 # Set up HashiCorp repository and install Terraform
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install -y terraform
 EOF
+
+# Install Terraform if not already detected in PATH
+if ! command -v terraform >/dev/null 2>&1; then
+    echo "Terraform CLI not found. Executing ~/.customize_environment..."
     bash ~/.customize_environment
+else
+    echo "Terraform is already available: $(terraform --version 2>/dev/null | head -n 1)"
 fi
+
+echo "Verifying Terraform version:"
 terraform --version
 
 # ==============================================================================
-# TASK 2: Add Google Cloud provider
+# TASK 3: Add Google Cloud provider
 # ==============================================================================
 echo ""
-echo ">>> [Task 2] Configuring Google Cloud provider in main.tf..."
+echo "=================================================="
+echo ">>> [Task 3] Configuring Google Cloud provider in main.tf..."
+echo "=================================================="
+
 cat << EOF > main.tf
 terraform {
   required_providers {
@@ -94,10 +104,16 @@ echo "Initializing Terraform..."
 terraform init
 
 # ==============================================================================
-# TASK 3: Build the infrastructure (e2-micro)
+# TASK 4: Build the infrastructure
+# 1. Define compute instance (e2-micro) with default network
+# 2. Run terraform plan
+# 3. Run terraform apply
 # ==============================================================================
 echo ""
-echo ">>> [Task 3] Defining and applying initial compute instance (e2-micro)..."
+echo "=================================================="
+echo ">>> [Task 4] Defining compute instance ${VM_NAME} (e2-micro)..."
+echo "=================================================="
+
 cat << EOF > main.tf
 terraform {
   required_providers {
@@ -131,16 +147,24 @@ resource "google_compute_instance" "terraform" {
 }
 EOF
 
+echo "Generating execution plan for Task 4..."
+terraform plan
+
+echo "Applying Terraform configuration..."
 terraform apply -auto-approve
-echo "Initial instance ${VM_NAME} (e2-micro) provisioned successfully."
+
+echo "Compute instance ${VM_NAME} (e2-micro) created successfully."
 
 # ==============================================================================
-# TASK 4: Change the infrastructure
-# 1. Add tags: ["web", "dev"]
-# 2. Update machine_type: e2-medium with allow_stopping_for_update = true
+# TASK 5: Change the infrastructure
+# Step 1: Adding tags to the compute resource: ["web", "dev"]
+# Step 2: Editing the machine type: e2-medium with allow_stopping_for_update = true
 # ==============================================================================
 echo ""
-echo ">>> [Task 4 - Step 1] Adding tags ['web', 'dev'] to ${VM_NAME}..."
+echo "=================================================="
+echo ">>> [Task 5 - Step 1] Adding tags ['web', 'dev'] to ${VM_NAME}..."
+echo "=================================================="
+
 cat << EOF > main.tf
 terraform {
   required_providers {
@@ -175,11 +199,15 @@ resource "google_compute_instance" "terraform" {
 }
 EOF
 
+terraform plan
 terraform apply -auto-approve
-echo "Tags ['web', 'dev'] applied successfully."
+echo "Tags ['web', 'dev'] added successfully."
 
 echo ""
-echo ">>> [Task 4 - Step 2] Scaling machine type to e2-medium with allow_stopping_for_update..."
+echo "=================================================="
+echo ">>> [Task 5 - Step 2] Updating machine type to e2-medium with allow_stopping_for_update..."
+echo "=================================================="
+
 cat << EOF > main.tf
 terraform {
   required_providers {
@@ -215,45 +243,48 @@ resource "google_compute_instance" "terraform" {
 }
 EOF
 
+terraform plan
 terraform apply -auto-approve
-echo "Instance scaled to e2-medium with allow_stopping_for_update = true."
+echo "Machine type updated to e2-medium successfully."
 
-# Verification of current infrastructure
+# Verify current VM state on Compute Engine
 echo ""
 echo "=================================================="
-echo "CURRENT INFRASTRUCTURE STATUS"
+echo "CURRENT VM INSTANCE STATE"
 echo "=================================================="
 gcloud compute instances describe "${VM_NAME}" --zone="${ZONE}" --format="yaml(name, machineType, tags.items, status)" 2>/dev/null || true
 echo "=================================================="
 
 # ==============================================================================
-# CHECKPOINT CONFIRMATION BEFORE DESTROY
+# CHECKPOINT CONFIRMATION BEFORE TASK 6 (DESTROY)
 # ==============================================================================
 if [ "$AUTO_DESTROY" = "true" ]; then
     echo ""
-    echo "AUTO_DESTROY=true is set. Proceeding to tear down infrastructure..."
+    echo "AUTO_DESTROY=true is set. Proceeding directly to Task 6 (destroy)..."
 else
     echo ""
     echo -e "${CYAN}+-------------------------------------------------------------------+${NC}"
     echo -e "${CYAN}|                                                                   |${NC}"
-    echo -e "${CYAN}|${YELLOW}  [!] ACTION REQUIRED: Check your progress in the lab NOW for:     ${CYAN}|${NC}"
+    echo -e "${CYAN}|${YELLOW}  [!] ACTION REQUIRED: Verify checkpoints in the lab UI now:       ${CYAN}|${NC}"
     echo -e "${CYAN}|                                                                   |${NC}"
     echo -e "${CYAN}|${GREEN}      1. Build the infrastructure                                  ${CYAN}|${NC}"
     echo -e "${CYAN}|${GREEN}      2. Adding tags to the compute resource                       ${CYAN}|${NC}"
     echo -e "${CYAN}|${GREEN}      3. Change the infrastructure for machine-type                ${CYAN}|${NC}"
     echo -e "${CYAN}|                                                                   |${NC}"
-    echo -e "${CYAN}|${YELLOW}  Do NOT press Enter until you have verified the first 3 checks!   ${CYAN}|${NC}"
+    echo -e "${CYAN}|${YELLOW}  Do NOT press Enter until checkpoints 1, 2, and 3 are green!       ${CYAN}|${NC}"
     echo -e "${CYAN}|                                                                   |${NC}"
     echo -e "${CYAN}+-------------------------------------------------------------------+${NC}"
     echo ""
-    read -p "Once the first 3 checkpoints are green, press [Enter] to run 'terraform destroy' for Task 5..." || true
+    read -p "Once verified, press [Enter] to run Task 6 (terraform destroy)..." || true
 fi
 
 # ==============================================================================
-# TASK 5: Destroy the infrastructure
+# TASK 6: Destroy the infrastructure
 # ==============================================================================
 echo ""
-echo ">>> [Task 5] Destroying Terraform-managed infrastructure..."
+echo "=================================================="
+echo ">>> [Task 6] Destroying Terraform-managed infrastructure..."
+echo "=================================================="
 terraform destroy -auto-approve
 echo "Infrastructure destroyed successfully."
 
