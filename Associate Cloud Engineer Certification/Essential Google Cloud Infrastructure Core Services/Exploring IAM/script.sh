@@ -6,8 +6,12 @@ set -eo pipefail
 # Edit these variables if your lab specifies different values.
 # Override inline: REGION="us-east1" ZONE="us-east1-c" USER_2="user2@qwiklabs.net" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-east1")}"
-export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-east1-c")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-us-east1}}"
+[ "$REGION" = "(unset)" ] && export REGION="us-east1"
+_DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE="${ZONE:-${_DET_ZONE:-us-east1-c}}"
+[ "$ZONE" = "(unset)" ] && export ZONE="us-east1-c"
 export USER_2="${USER_2:-student-00-1bec6af663b5@qwiklabs.net}"
 export BUCKET_NAME="${BUCKET_NAME:-}"
 export TEST_DOMAIN="${TEST_DOMAIN:-altostrat.com}"

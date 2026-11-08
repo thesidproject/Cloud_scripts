@@ -7,7 +7,9 @@ START_TIME=$(date +%s)
 # Edit these variables if your lab specifies different parameters.
 # Override inline: REGION="europe-west" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "europe-west")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-europe-west}}"
+[ "$REGION" = "(unset)" ] && export REGION="europe-west"
 
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP

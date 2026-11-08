@@ -6,8 +6,12 @@ set -eo pipefail
 # Edit these variables if your lab specifies different values.
 # Override inline: REGION="us-central1" ZONE="us-central1-a" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-east4")}"
-export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-east4-b")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-us-east4}}"
+[ "$REGION" = "(unset)" ] && export REGION="us-east4"
+_DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE="${ZONE:-${_DET_ZONE:-us-east4-b}}"
+[ "$ZONE" = "(unset)" ] && export ZONE="us-east4-b"
 
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP

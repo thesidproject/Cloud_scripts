@@ -5,8 +5,12 @@ START_TIME=$(date +%s)
 # ==============================================================================
 # 1. USER CONFIGURATIONS & DYNAMIC MULTI-PROJECT RESOLUTION
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-west1")}"
-export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-west1-c")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-us-west1}}"
+[ "$REGION" = "(unset)" ] && export REGION="us-west1"
+_DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE="${ZONE:-${_DET_ZONE:-us-west1-c}}"
+[ "$ZONE" = "(unset)" ] && export ZONE="us-west1-c"
 
 CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
 

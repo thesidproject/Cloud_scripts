@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 set -e
 
 # Automatically set project ID
@@ -11,8 +11,12 @@ echo "Using Project ID: $PROJECT_ID"
 gcloud config set project "$PROJECT_ID" --quiet
 
 # Dynamically set regions/zones based on lab parameters
-export REGION_1="${REGION_1:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-east1")}"
-export ZONE_1="${ZONE_1:-$(gcloud config get-value compute/zone 2>/dev/null || echo "${REGION_1}-c")}"
+_DET_REGION_1=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION_1="${REGION_1:-${_DET_REGION_1:-us-east1}}"
+[ "$REGION_1" = "(unset)" ] && export REGION_1="us-east1"
+_DET_ZONE_1=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE_1="${ZONE_1:-${_DET_ZONE_1:-${REGION_1}-c}}"
+[ "$ZONE_1" = "(unset)" ] && export ZONE_1="${REGION_1}-c"
 export REGION_2="${REGION_2:-us-east4}"
 export ZONE_2="${ZONE_2:-${REGION_2}-a}"
 

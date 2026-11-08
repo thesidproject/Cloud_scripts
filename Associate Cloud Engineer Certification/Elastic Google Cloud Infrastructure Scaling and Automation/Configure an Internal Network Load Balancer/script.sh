@@ -7,7 +7,9 @@ START_TIME=$(date +%s)
 # Edit these variables if your lab specifies different regions/zones.
 # Override inline: REGION="us-east4" ZONE_A="us-east4-a" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-east4")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-us-east4}}"
+[ "$REGION" = "(unset)" ] && export REGION="us-east4"
 export ZONE_A="${ZONE_A:-${REGION}-a}"
 export ZONE_B="${ZONE_B:-${REGION}-b}"
 export ZONE_C="${ZONE_C:-${REGION}-c}"

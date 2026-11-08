@@ -7,8 +7,12 @@ START_TIME=$(date +%s)
 # Edit these variables if your lab specifies different parameters.
 # Override inline: BUCKET_NAME="tf-bucket-XXX" VPC_NAME="tf-vpc-XXX" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-west1")}"
-export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-west1-b")}"
+_DET_REGION=$(gcloud config get-value compute/region 2>/dev/null || true)
+export REGION="${REGION:-${_DET_REGION:-us-west1}}"
+[ "$REGION" = "(unset)" ] && export REGION="us-west1"
+_DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE="${ZONE:-${_DET_ZONE:-us-west1-b}}"
+[ "$ZONE" = "(unset)" ] && export ZONE="us-west1-b"
 export BUCKET_NAME="${BUCKET_NAME:-tf-bucket-321642}"
 export INSTANCE_3_NAME="${INSTANCE_3_NAME:-tf-instance-717102}"
 export VPC_NAME="${VPC_NAME:-tf-vpc-928990}"

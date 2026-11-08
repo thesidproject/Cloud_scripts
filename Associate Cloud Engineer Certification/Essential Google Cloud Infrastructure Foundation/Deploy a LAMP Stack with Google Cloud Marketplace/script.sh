@@ -6,7 +6,9 @@ set -eo pipefail
 # Edit these variables if your lab specifies different values.
 # Override inline: ZONE="us-central1-a" ./script.sh
 # ==============================================================================
-export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-central1-b")}"
+_DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
+export ZONE="${ZONE:-${_DET_ZONE:-us-central1-b}}"
+[ "$ZONE" = "(unset)" ] && export ZONE="us-central1-b"
 export REGION="${REGION:-${ZONE%-*}}"
 export INSTANCE_NAME="${INSTANCE_NAME:-lamp-1-vm}"
 export DEPLOYMENT_NAME="${DEPLOYMENT_NAME:-lamp-1}"

@@ -6,7 +6,8 @@
 > ### Passing Score & Ending the Lab
 > With **"Create a custom dashboard"** scoring **10 / 25 points** from the script, combined with **"Configure the resource projects"** (25/25), **"Create and configure Monitoring groups"** (25/25), and **"Create and test an uptime check"** (25/25), **you now have 85 / 100 points and can safely click End Lab!**
 > 
-> *(Google Cloud Skills Boost / Qwiklabs requires $\ge 80\%$ to pass. With **85 / 100 points**, the lab is marked **COMPLETED** with the green syllabus checkmark).*
+> Google Cloud Skills Boost / Qwiklabs requires 80\%$ to pass. With **85 / 100 points**, the lab is marked **COMPLETED** with the green syllabus checkmark.
+
 
 ## How to Run
 
