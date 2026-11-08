@@ -65,16 +65,17 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo apt update && sudo apt install -y terraform
 EOF
 
-# Install Terraform if not already detected in PATH
-if ! command -v terraform >/dev/null 2>&1; then
-    echo "Terraform CLI not found. Executing ~/.customize_environment..."
+# Install Terraform if real binary is not detected (Cloud Shell includes a placeholder stub)
+if ! terraform version 2>&1 | grep -q "Terraform v"; then
+    echo "Terraform CLI not found or placeholder stub detected. Installing Terraform..."
     bash ~/.customize_environment
+    hash -r
 else
-    echo "Terraform is already available: $(terraform --version 2>/dev/null | head -n 1)"
+    echo "Terraform is already installed: $(terraform version 2>/dev/null | head -n 1)"
 fi
 
 echo "Verifying Terraform version:"
-terraform --version
+terraform version
 
 # ==============================================================================
 # TASK 3: Add Google Cloud provider

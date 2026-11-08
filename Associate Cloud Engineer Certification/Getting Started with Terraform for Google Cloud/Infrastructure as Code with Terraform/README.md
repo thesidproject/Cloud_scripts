@@ -1,5 +1,4 @@
 # <span style="color:red">THIS SCRIPT MAY NOT WORK - DO MANUALLY</span>
-
 # Infrastructure as Code with Terraform
 
 ## Estimated Time: 2:30 minutes
@@ -40,10 +39,3 @@
    ```
 
 ---
-
-## Checkpoints Verified
-
-- **Build the infrastructure:** Verified after initial `terraform apply` provisions the `e2-micro` VM with boot disk and default network.
-- **Adding tags to the compute resource:** Verified after in-place update applying tags `["web", "dev"]`.
-- **Change the infrastructure for machine-type:** Verified after updating to `e2-medium` with `allow_stopping_for_update = true`.
-- **Destroy the Infrastructure:** Verified after `terraform destroy -auto-approve` tears down the resources.
