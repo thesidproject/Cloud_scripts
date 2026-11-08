@@ -1,4 +1,10 @@
+# <span style="color:red">THIS SCRIPT IS NOT WORKING - DO MANUALLY</span>
+
 # Infrastructure as Code with Terraform
+
+> [!CAUTION]
+> # <span style="color:red">THIS SCRIPT IS NOT WORKING - DO MANUALLY</span>
+> **Do not use this script. Please follow the lab guide and complete all tasks manually in Cloud Shell and Google Cloud Console.**
 
 ## Estimated Time: 2:30 minutes
 
