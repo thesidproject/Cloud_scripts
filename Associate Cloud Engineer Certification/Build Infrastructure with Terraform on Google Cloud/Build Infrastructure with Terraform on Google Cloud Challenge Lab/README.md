@@ -1,4 +1,4 @@
-# Build Infrastructure with Terraform on Google Cloud Challenge Lab
+﻿# Build Infrastructure with Terraform on Google Cloud Challenge Lab
 
 ## Estimated Time: 12 minutes
 
@@ -8,7 +8,7 @@
    ```bash
    nano script.sh
    ```
-###  (Paste the script code from VS Code, then press Ctrl+S to save, and Ctrl+X to exit)
+###  (Paste the script code, then press Ctrl+S to save, and Ctrl+X to exit)
 
 2. Make it executable and run it:
    ```bash

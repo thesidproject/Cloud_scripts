@@ -1,4 +1,4 @@
-# Google Cloud Shell bash scripts
+﻿# Google Cloud Shell bash scripts
 
 
 ---
@@ -22,7 +22,7 @@ Inside Google Cloud Shell:
 ```bash
 nano script.sh
 ```
-###  (Paste the script code from VS Code, then press Ctrl+S to save, and Ctrl+X to exit)
+###  (Paste the script code, then press Ctrl+S to save, and Ctrl+X to exit)
 ```bash
 chmod +x script.sh
 ./script.sh

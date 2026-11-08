@@ -1,4 +1,4 @@
-# Exploring IAM
+﻿# Exploring IAM
 
 ## Estimated Time: 5 minutes
 
@@ -10,7 +10,7 @@
    ```bash
    nano script.sh
    ```
-###  (Paste the script code from VS Code, then press Ctrl+S to save, and Ctrl+X to exit)
+###  (Paste the script code, then press Ctrl+S to save, and Ctrl+X to exit)
 
 3. Make it executable and run it:
    ```bash
