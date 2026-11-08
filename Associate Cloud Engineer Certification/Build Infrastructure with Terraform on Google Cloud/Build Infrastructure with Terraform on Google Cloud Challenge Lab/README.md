@@ -1,4 +1,4 @@
-﻿# Build Infrastructure with Terraform on Google Cloud Challenge Lab
+# Build Infrastructure with Terraform on Google Cloud Challenge Lab
 
 ## Estimated Time: 12 minutes
 
@@ -18,5 +18,5 @@
 
 3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   BUCKET_NAME="tf-bucket-321642" INSTANCE_3_NAME="tf-instance-717102" VPC_NAME="tf-vpc-928990" ./script.sh
+   REGION="us-west1" ZONE="us-west1-b" BUCKET_NAME="tf-bucket-321642" INSTANCE_3_NAME="tf-instance-717102" VPC_NAME="tf-vpc-928990" ./script.sh
    ```

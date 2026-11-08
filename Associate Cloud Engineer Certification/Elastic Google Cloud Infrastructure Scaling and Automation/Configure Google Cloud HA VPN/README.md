@@ -1,4 +1,4 @@
-﻿# Configure Google Cloud HA VPN
+# Configure Google Cloud HA VPN
 
 ## Estimated Time: 5 minutes
 
@@ -28,7 +28,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override regions or zones inline if assigned different parameters:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION1="europe-west1" ZONE1="europe-west1-b" REGION2="us-east4" ZONE2="us-east4-b" ./script.sh
+   REGION1="europe-west1" ZONE1="europe-west1-b" REGION2="us-east4" ZONE2="us-east4-b" ZONE_ON_PREM="europe-west1-c" ./script.sh
    ```

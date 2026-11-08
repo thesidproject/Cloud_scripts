@@ -1,4 +1,4 @@
-﻿# Automating the Deployment of Infrastructure Using Terraform
+# Automating the Deployment of Infrastructure Using Terraform
 
 ## Estimated Time: 2 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override zones inline if assigned different parameters:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   ZONE_1="europe-west4-c" ZONE_2="europe-west1-b" ./script.sh
+   REGION_1="europe-west4" ZONE_1="europe-west4-c" REGION_2="europe-west1" ZONE_2="europe-west1-b" ./script.sh
    ```

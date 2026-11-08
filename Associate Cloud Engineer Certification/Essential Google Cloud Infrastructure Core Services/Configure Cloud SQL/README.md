@@ -1,4 +1,4 @@
-﻿# Configure Cloud SQL
+# Configure Cloud SQL
 
 ## Estimated Time: 9 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a different region, zone, or root password:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ZONE="your-zone" ROOT_PASSWORD="your-password" ./script.sh
+   REGION="us-west1" ZONE="us-west1-b" ROOT_PASSWORD="Passw0rd1!" ./script.sh
    ```

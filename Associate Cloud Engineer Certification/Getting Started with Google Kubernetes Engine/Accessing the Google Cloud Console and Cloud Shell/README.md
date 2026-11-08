@@ -1,4 +1,4 @@
-﻿# Accessing the Google Cloud Console and Cloud Shell
+# Accessing the Google Cloud Console and Cloud Shell
 
 ## Estimated Time: 2 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override region or zone inline if assigned different parameters:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
    REGION="europe-west1" ZONE="europe-west1-c" ./script.sh
    ```

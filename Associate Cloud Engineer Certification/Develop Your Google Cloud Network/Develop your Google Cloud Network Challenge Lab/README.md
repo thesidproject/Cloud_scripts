@@ -1,4 +1,4 @@
-﻿# Develop your Google Cloud Network Challenge Lab
+# Develop your Google Cloud Network Challenge Lab
 
 ## Estimated Time: 6 minutes
 
@@ -18,7 +18,7 @@
    ./script.sh
    ```
 
-4. *(Optional)* Override region, zone, or User 2 inline if assigned different parameters:
+4. *(Optional)* Override parameters inline if assigned different values:
    ```bash
    REGION="us-east1" ZONE="us-east1-c" USER_2="student-04-fbecdf0f14bd@qwiklabs.net" ./script.sh
    ```

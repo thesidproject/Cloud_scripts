@@ -1,4 +1,4 @@
-﻿# Deploy a LAMP Stack with Google Cloud Marketplace
+# Deploy a LAMP Stack with Google Cloud Marketplace
 
 ## Estimated Time: 4 minutes
 
@@ -18,7 +18,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a specific zone:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   ZONE="your-zone" ./script.sh
+   ZONE="us-central1-b" ./script.sh
    ```

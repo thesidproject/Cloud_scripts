@@ -1,4 +1,4 @@
-﻿# Working with Cloud Build
+# Working with Cloud Build
 
 ## Estimated Time: 3 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override region inline if assigned a different location:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="us-east4" ./script.sh
+   REGION="us-east4" REPO_NAME="quickstart-docker-repo" ./script.sh
    ```

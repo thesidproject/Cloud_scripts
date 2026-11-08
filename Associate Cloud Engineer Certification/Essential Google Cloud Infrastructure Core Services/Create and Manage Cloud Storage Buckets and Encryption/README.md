@@ -1,4 +1,4 @@
-﻿# Create and Manage Cloud Storage Buckets and Encryption
+# Create and Manage Cloud Storage Buckets and Encryption
 
 ## Estimated Time: 5 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a different region or bucket name:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" BUCKET_NAME_1="your-bucket-name" ./script.sh
+   REGION="us-east1" BUCKET_NAME_1="qwiklabs-gcp-01-bucket1" ./script.sh
    ```

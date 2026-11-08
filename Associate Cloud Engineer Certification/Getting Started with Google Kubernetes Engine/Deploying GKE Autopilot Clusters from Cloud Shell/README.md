@@ -1,4 +1,4 @@
-﻿# Deploying GKE Autopilot Clusters from Cloud Shell
+# Deploying GKE Autopilot Clusters from Cloud Shell
 
 ## Estimated Time: 9 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override region inline if assigned a different location:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="us-west1" ./script.sh
+   REGION="us-west1" CLUSTER_NAME="autopilot-cluster-1" ./script.sh
    ```

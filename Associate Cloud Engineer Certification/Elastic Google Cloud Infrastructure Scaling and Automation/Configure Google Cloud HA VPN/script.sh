@@ -6,8 +6,8 @@ set -eo pipefail
 # Edit these variables if your lab assigns different regions/zones.
 # Override inline: REGION1="europe-west1" ZONE1="europe-west1-b" ./script.sh
 # ==============================================================================
-export REGION1="${REGION1:-europe-west1}"
-export ZONE1="${ZONE1:-europe-west1-b}"
+export REGION1="${REGION1:-$(gcloud config get-value compute/region 2>/dev/null || echo "europe-west1")}"
+export ZONE1="${ZONE1:-$(gcloud config get-value compute/zone 2>/dev/null || echo "europe-west1-b")}"
 export REGION2="${REGION2:-us-east4}"
 export ZONE2="${ZONE2:-us-east4-b}"
 export ZONE_ON_PREM="${ZONE_ON_PREM:-europe-west1-c}"

@@ -1,4 +1,4 @@
-﻿# Explore the Google Cloud Console and Cloud Shell
+# Explore the Google Cloud Console and Cloud Shell
 
 ## Estimated Time: 3 minutes
 
@@ -18,7 +18,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a specific region:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ./script.sh
+   REGION="us-central1" ./script.sh
    ```

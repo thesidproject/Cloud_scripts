@@ -7,8 +7,8 @@ START_TIME=$(date +%s)
 # Edit these variables if your lab specifies different regions/zones.
 # Override inline: REGION="europe-west1" ZONE="europe-west1-c" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-europe-west1}"
-export ZONE="${ZONE:-europe-west1-c}"
+export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || echo "europe-west1")}"
+export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "europe-west1-c")}"
 export INSTANCE_NAME="${INSTANCE_NAME:-first-vm}"
 export SA_NAME="${SA_NAME:-test-service-account}"
 

@@ -1,4 +1,4 @@
-﻿# Examine Billing data with BigQuery
+# Examine Billing data with BigQuery
 
 ## Estimated Time: 3 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a different location or dataset name:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   LOCATION="US" DATASET_NAME="billing_dataset" ./script.sh
+   LOCATION="US" DATASET_NAME="billing_dataset" TABLE_NAME="sampleinfotable" ./script.sh
    ```

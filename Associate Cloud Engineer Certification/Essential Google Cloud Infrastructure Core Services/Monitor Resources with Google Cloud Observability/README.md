@@ -1,4 +1,4 @@
-﻿# Monitor Resources with Google Cloud Observability
+# Monitor Resources with Google Cloud Observability
 
 ## Estimated Time: 2 minutes
 
@@ -16,9 +16,9 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a specific notification email:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   NOTIFICATION_EMAIL="your-email@example.com" ./script.sh
+   NOTIFICATION_EMAIL="student@qwiklabs.net" ./script.sh
    ```
 
 > [!NOTE]

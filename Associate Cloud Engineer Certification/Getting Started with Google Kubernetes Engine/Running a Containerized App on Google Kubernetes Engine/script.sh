@@ -7,7 +7,7 @@ START_TIME=$(date +%s)
 # Edit these variables if your lab specifies different parameters.
 # Override inline: ZONE="us-west1-c" ./script.sh
 # ==============================================================================
-export ZONE="${ZONE:-us-west1-c}"
+export ZONE="${ZONE:-$(gcloud config get-value compute/zone 2>/dev/null || echo "us-west1-c")}"
 export REGION="${REGION:-${ZONE%-*}}"
 export CLUSTER_NAME="${CLUSTER_NAME:-hello-world}"
 export APP_NAME="${APP_NAME:-hello-app}"

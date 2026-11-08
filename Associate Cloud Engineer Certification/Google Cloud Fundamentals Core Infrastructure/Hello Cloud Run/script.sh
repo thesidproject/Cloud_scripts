@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -eo pipefail
 
 # ==============================================================================
@@ -7,7 +7,7 @@ set -eo pipefail
 # You can also override them inline without modifying the script:
 # e.g.: REGION="us-east1" ./script.sh
 # ==============================================================================
-export REGION="${REGION:-us-central1}"
+export REGION="${REGION:-$(gcloud config get-value compute/region 2>/dev/null || gcloud config get-value run/region 2>/dev/null || echo "us-central1")}"
 export LOCATION="${LOCATION:-$REGION}"
 export REPO_NAME="${REPO_NAME:-my-repository}"
 export SERVICE_NAME="${SERVICE_NAME:-helloworld}"

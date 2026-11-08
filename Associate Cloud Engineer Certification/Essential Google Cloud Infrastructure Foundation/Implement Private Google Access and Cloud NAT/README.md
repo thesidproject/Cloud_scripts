@@ -1,4 +1,4 @@
-﻿# Implement Private Google Access and Cloud NAT
+# Implement Private Google Access and Cloud NAT
 
 ## Estimated Time: 9 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a different region or zone:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ZONE="your-zone" ./script.sh
+   REGION="us-east4" ZONE="us-east4-b" ./script.sh
    ```

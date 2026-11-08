@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -e
 
 # Automatically set project ID
@@ -11,10 +11,10 @@ echo "Using Project ID: $PROJECT_ID"
 gcloud config set project "$PROJECT_ID" --quiet
 
 # Dynamically set regions/zones based on lab parameters
-REGION_1="us-east1"
-ZONE_1="${REGION_1}-c"
-REGION_2="us-east4"
-ZONE_2="${REGION_2}-a"
+export REGION_1="${REGION_1:-$(gcloud config get-value compute/region 2>/dev/null || echo "us-east1")}"
+export ZONE_1="${ZONE_1:-$(gcloud config get-value compute/zone 2>/dev/null || echo "${REGION_1}-c")}"
+export REGION_2="${REGION_2:-us-east4}"
+export ZONE_2="${ZONE_2:-${REGION_2}-a}"
 
 # 1. Clean up default firewall rules and default network
 FIREWALL_RULES=$(gcloud compute firewall-rules list --filter="network=default" --format="value(name)" 2>/dev/null || true)

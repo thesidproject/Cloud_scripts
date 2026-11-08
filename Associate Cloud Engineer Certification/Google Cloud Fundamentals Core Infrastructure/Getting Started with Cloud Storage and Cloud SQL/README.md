@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a specific region or zone:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ZONE="your-zone" ./script.sh
+   REGION="us-central1" ZONE="us-central1-c" ./script.sh
    ```

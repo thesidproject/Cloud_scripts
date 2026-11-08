@@ -1,4 +1,4 @@
-﻿# Create and Configure VPC Networks
+# Create and Configure VPC Networks
 
 ## Estimated Time: 10 minutes
 
@@ -19,7 +19,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned different regions or zones:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION_1="your-us-region" ZONE_1="your-us-zone" REGION_2="your-eu-region" ZONE_2="your-eu-zone" ./script.sh
+   REGION_1="us-east1" ZONE_1="us-east1-c" REGION_2="europe-west4" ZONE_2="europe-west4-c" ./script.sh
    ```

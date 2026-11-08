@@ -1,4 +1,4 @@
-﻿# Create and Configure Virtual Machines
+# Create and Configure Virtual Machines
 
 ## Estimated Time: 7 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a different region or zone (defaults to `us-east4` and `us-east4-c`):
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ZONE="your-zone" ./script.sh
+   REGION="us-east4" ZONE="us-east4-c" ./script.sh
    ```

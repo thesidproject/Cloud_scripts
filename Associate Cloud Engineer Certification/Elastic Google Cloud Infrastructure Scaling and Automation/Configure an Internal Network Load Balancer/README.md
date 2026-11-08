@@ -1,4 +1,4 @@
-﻿# Configure an Internal Network Load Balancer
+# Configure an Internal Network Load Balancer
 
 ## Estimated Time: 4 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override regions or zones inline if assigned different parameters:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
    REGION="us-east4" ZONE_A="us-east4-a" ZONE_B="us-east4-b" ZONE_C="us-east4-c" ./script.sh
    ```

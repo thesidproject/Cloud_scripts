@@ -1,4 +1,4 @@
-﻿# Exploring IAM
+# Exploring IAM
 
 ## Estimated Time: 5 minutes
 
@@ -18,7 +18,7 @@
    ./script.sh
    ```
 
-4. *(Optional)* If your lab assigned a different region, zone, or User 2:
+4. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION="your-region" ZONE="your-zone" USER_2="student-XX-XXXX@qwiklabs.net" ./script.sh
+   REGION="us-east1" ZONE="us-east1-c" USER_2="student-00-1bec6af663b5@qwiklabs.net" ./script.sh
    ```

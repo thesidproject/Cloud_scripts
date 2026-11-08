@@ -1,4 +1,4 @@
-﻿# Running a Containerized App on Google Kubernetes Engine
+# Running a Containerized App on Google Kubernetes Engine
 
 ## Estimated Time: 8 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override zone inline if assigned a different location:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   ZONE="us-west1-c" ./script.sh
+   ZONE="us-west1-c" CLUSTER_NAME="hello-world" APP_NAME="hello-app" ./script.sh
    ```

@@ -1,4 +1,4 @@
-﻿# Get Started with Virtual Private Cloud Networking and Compute Engine
+# Get Started with Virtual Private Cloud Networking and Compute Engine
 
 ## Estimated Time: 4 minutes
 
@@ -19,7 +19,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* If your lab assigned a specific region or zone:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION_1="your-region" ZONE_1="your-zone" ./script.sh
+   REGION_1="us-east1" ZONE_1="us-east1-c" REGION_2="us-east4" ZONE_2="us-east4-a" ./script.sh
    ```

@@ -1,4 +1,4 @@
-﻿# Configure an Application Load Balancer with Autoscaling
+# Configure an Application Load Balancer with Autoscaling
 
 ## Estimated Time: 11 minutes
 
@@ -16,7 +16,7 @@
    ./script.sh
    ```
 
-3. *(Optional)* Override regions or zones inline if assigned different parameters:
+3. *(Optional)* Override parameters inline if assigned different values:
    ```bash
-   REGION1="us-east1" ZONE1="us-east1-d" REGION2="asia-south1" ./script.sh
+   REGION1="us-east1" ZONE1="us-east1-d" REGION2="asia-south1" ZONE_STRESS="us-east1-b" ./script.sh
    ```
