@@ -23,10 +23,10 @@ export PROJECT_ID_3="${PROJECT_ID_3:-}"
 if [ -z "$PROJECT_ID_2" ] || [ -z "$PROJECT_ID_3" ]; then
     OTHER_PROJECTS=($(gcloud projects list --format="value(projectId)" 2>/dev/null | grep -v "^${PROJECT_ID_1}$" || true))
     if [ -z "$PROJECT_ID_2" ] && [ ${#OTHER_PROJECTS[@]} -ge 1 ]; then
-        export PROJECT_ID_2="${OTHER_PROJECTS[0]}"
+        export PROJECT_ID_2="${PROJECT_ID_2:-${OTHER_PROJECTS[0]}}"
     fi
     if [ -z "$PROJECT_ID_3" ] && [ ${#OTHER_PROJECTS[@]} -ge 2 ]; then
-        export PROJECT_ID_3="${OTHER_PROJECTS[1]}"
+        export PROJECT_ID_3="${PROJECT_ID_3:-${OTHER_PROJECTS[1]}}"
     fi
 fi
 

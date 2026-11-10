@@ -14,13 +14,15 @@ export REGION="${REGION:-${_DET_REGION:-europe-west}}"
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
 
-export USER_EMAIL=$(gcloud config get-value account 2>/dev/null || echo "student@qwiklabs.net")
+_DET_ACCOUNT=$(gcloud config get-value account 2>/dev/null || true)
+export USER_EMAIL="${USER_EMAIL:-${_DET_ACCOUNT:-student@qwiklabs.net}}"
 
 echo "=================================================="
 echo "Project ID       : $PROJECT_ID"
@@ -42,8 +44,8 @@ gcloud services enable \
 # ==============================================================================
 # 3. TASK 1: SETUP APPLICATION SOURCE CODE DIRECTORY
 # ==============================================================================
-REPO_DIR="$HOME/training-data-analyst"
-TARGET_DIR="$REPO_DIR/courses/design-process/deploying-apps-to-gcp"
+REPO_DIR="${REPO_DIR:-$HOME/training-data-analyst}"
+TARGET_DIR="${TARGET_DIR:-$REPO_DIR/courses/design-process/deploying-apps-to-gcp}"
 
 echo "Setting up application source files in ${TARGET_DIR}..."
 if [ ! -d "$TARGET_DIR" ]; then

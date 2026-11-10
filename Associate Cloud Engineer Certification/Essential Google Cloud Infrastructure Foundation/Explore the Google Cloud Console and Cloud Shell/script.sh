@@ -17,8 +17,9 @@ export MY_FILE="${MY_FILE:-sample.txt}"
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
 # Auto-detect Project ID
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
@@ -32,20 +33,20 @@ FIRST_EXISTING=$(echo "$EXISTING_BUCKETS" | head -n 1)
 
 if [ -z "$BUCKET_NAME_1" ]; then
     if [ -n "$FIRST_EXISTING" ]; then
-        export BUCKET_NAME_1="$FIRST_EXISTING"
+        export BUCKET_NAME_1="${BUCKET_NAME_1:-$FIRST_EXISTING}"
         echo "Detected bucket created via Console: gs://$BUCKET_NAME_1"
     else
-        export BUCKET_NAME_1="${PROJECT_ID}-console-bucket"
+        export BUCKET_NAME_1="${BUCKET_NAME_1:-${PROJECT_ID}-console-bucket}"
     fi
 fi
 
 if [ -z "$BUCKET_NAME_2" ]; then
-    export BUCKET_NAME_2="${PROJECT_ID}-shell-bucket"
+    export BUCKET_NAME_2="${BUCKET_NAME_2:-${PROJECT_ID}-shell-bucket}"
 fi
 
 # Ensure bucket 2 has a distinct name from bucket 1
 if [ "$BUCKET_NAME_2" = "$BUCKET_NAME_1" ]; then
-    export BUCKET_NAME_2="${PROJECT_ID}-shell-bucket-2"
+    export BUCKET_NAME_2="${BUCKET_NAME_2:-${PROJECT_ID}-shell-bucket-2}"
 fi
 
 echo "=================================================="

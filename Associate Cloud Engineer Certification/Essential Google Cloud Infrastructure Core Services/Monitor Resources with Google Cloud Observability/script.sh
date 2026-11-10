@@ -11,15 +11,15 @@ export NOTIFICATION_EMAIL="${NOTIFICATION_EMAIL:-}"
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
 
-if [ -z "$NOTIFICATION_EMAIL" ]; then
-    export NOTIFICATION_EMAIL=$(gcloud config get-value account 2>/dev/null || echo "student@qwiklabs.net")
-fi
+_DET_EMAIL=$(gcloud config get-value account 2>/dev/null || true)
+export NOTIFICATION_EMAIL="${NOTIFICATION_EMAIL:-${_DET_EMAIL:-student@qwiklabs.net}}"
 
 echo "=================================================="
 echo "Project ID         : $PROJECT_ID"

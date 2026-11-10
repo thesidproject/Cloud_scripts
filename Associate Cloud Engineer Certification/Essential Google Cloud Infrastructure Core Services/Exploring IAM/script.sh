@@ -12,15 +12,15 @@ export REGION="${REGION:-${_DET_REGION:-us-east1}}"
 _DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
 export ZONE="${ZONE:-${_DET_ZONE:-us-east1-c}}"
 [ "$ZONE" = "(unset)" ] && export ZONE="us-east1-c"
-export USER_2="${USER_2:-student-00-1bec6af663b5@qwiklabs.net}"
-export BUCKET_NAME="${BUCKET_NAME:-}"
+export USER_2="${USER_2:-}"
 export TEST_DOMAIN="${TEST_DOMAIN:-altostrat.com}"
 
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
@@ -28,7 +28,7 @@ fi
 CURRENT_USER=$(gcloud config get-value account 2>/dev/null || true)
 
 # Auto-detect USER_2 from IAM policy if not explicitly provided or if placeholder matches
-if [ -z "$USER_2" ] || [ "$USER_2" = "student-00-1bec6af663b5@qwiklabs.net" ]; then
+if [ -z "$USER_2" ]; then
     DETECTED_USER_2=$(gcloud projects get-iam-policy "$PROJECT_ID" \
         --flatten="bindings[].members" \
         --format="value(bindings.members)" 2>/dev/null \
@@ -38,13 +38,11 @@ if [ -z "$USER_2" ] || [ "$USER_2" = "student-00-1bec6af663b5@qwiklabs.net" ]; t
         | sort -u \
         | head -n1 || true)
     if [ -n "$DETECTED_USER_2" ]; then
-        USER_2="$DETECTED_USER_2"
+        export USER_2="${USER_2:-$DETECTED_USER_2}"
     fi
 fi
 
-if [ -z "$BUCKET_NAME" ]; then
-    export BUCKET_NAME="${PROJECT_ID}-bucket"
-fi
+export BUCKET_NAME="${BUCKET_NAME:-${PROJECT_ID}-bucket}"
 
 echo "=================================================="
 echo "Project ID  : $PROJECT_ID"

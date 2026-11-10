@@ -1,10 +1,11 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -e
 
 # Automatically set project ID
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
-if [ -z "$PROJECT_ID" ]; then
-    echo "Error: GCP Project ID not found."
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
+    echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
 echo "Using Project ID: $PROJECT_ID"

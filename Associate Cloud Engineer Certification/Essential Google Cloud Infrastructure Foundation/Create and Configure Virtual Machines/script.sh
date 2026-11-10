@@ -12,21 +12,18 @@ export REGION="${REGION:-${_DET_REGION:-us-east4}}"
 _DET_ZONE=$(gcloud config get-value compute/zone 2>/dev/null || true)
 export ZONE="${ZONE:-${_DET_ZONE:-us-east4-c}}"
 [ "$ZONE" = "(unset)" ] && export ZONE="us-east4-c"
-export BUCKET_NAME="${BUCKET_NAME:-}"
 
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
 
-export YOUR_BUCKET_NAME="${YOUR_BUCKET_NAME:-$PROJECT_ID}"
-if [ -z "$BUCKET_NAME" ]; then
-    export BUCKET_NAME="${YOUR_BUCKET_NAME}-minecraft-backup"
-fi
+export BUCKET_NAME="${BUCKET_NAME:-${PROJECT_ID}-minecraft-backup}"
 
 echo "=================================================="
 echo "Project ID   : $PROJECT_ID"

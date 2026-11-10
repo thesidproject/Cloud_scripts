@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -eo pipefail
 START_TIME=$(date +%s)
 
@@ -20,8 +20,9 @@ export VPC_NAME="${VPC_NAME:-tf-vpc-928990}"
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi

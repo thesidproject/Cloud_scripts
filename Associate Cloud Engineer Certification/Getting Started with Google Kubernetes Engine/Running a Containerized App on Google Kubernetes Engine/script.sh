@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -eo pipefail
 START_TIME=$(date +%s)
 
@@ -17,13 +17,14 @@ export APP_NAME="${APP_NAME:-hello-app}"
 # ==============================================================================
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
 
-export IMAGE_TAG="gcr.io/${PROJECT_ID}/${APP_NAME}:1.0"
+export IMAGE_TAG="${IMAGE_TAG:-gcr.io/${PROJECT_ID}/${APP_NAME}:1.0}"
 
 echo "=================================================="
 echo "Project ID       : $PROJECT_ID"

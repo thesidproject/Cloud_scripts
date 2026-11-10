@@ -19,8 +19,9 @@ export IMAGE_NAME="${IMAGE_NAME:-helloworld}"
 # 2. DYNAMIC ENVIRONMENT SETUP
 # ==============================================================================
 # Auto-detect Google Cloud Project ID
-export PROJECT_ID=$(gcloud config get-value project 2>/dev/null || echo "${GOOGLE_CLOUD_PROJECT:-$DEVSHELL_PROJECT_ID}")
-if [ -z "$PROJECT_ID" ]; then
+_DET_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+export PROJECT_ID="${PROJECT_ID:-${_DET_PROJECT:-${DEVSHELL_PROJECT_ID:-$GOOGLE_CLOUD_PROJECT}}}"
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" = "(unset)" ]; then
     echo "Error: Google Cloud Project ID not found. Ensure gcloud is initialized."
     exit 1
 fi
@@ -49,7 +50,7 @@ gcloud services enable run.googleapis.com \
 # 4. TASK 2: WRITE SAMPLE APPLICATION
 # ==============================================================================
 echo "Creating application directory and source files..."
-APP_DIR="$HOME/helloworld"
+export APP_DIR="${APP_DIR:-$HOME/helloworld}"
 mkdir -p "$APP_DIR"
 cd "$APP_DIR"
 
