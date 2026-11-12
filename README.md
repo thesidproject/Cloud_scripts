@@ -17,7 +17,7 @@
 ## Instructions for dumbos
 
 1. Download the zip file of project, extract it
-2. Open Antigravity on extracted directory
+2. Open Antigravity on extracted directory (use Gemini 3.8 Flash (High) in Antigravity)
 3. Open Chrome and open Google Skills
 4. Start the lab
 5. After lab started successfully remain on the same skills lab where there are instructions and give login details
@@ -77,9 +77,10 @@
    ```
 
 9. Copy the output and paste it in Antigravity
-10. Ask Antigravity to update the script according to given details
+10. Ask Antigravity (using Gemini 3.8 Flash (High)) to update the script according to given details
 11. Paste the updated script in Google Cloud Shell
-12. Don't forget to read current README of each lab
+12. Remember the 80% Passing Score Rule: Google Cloud Skills Boost / Qwiklabs marks a lab complete with a syllabus green checkmark once you reach 80% or higher (e.g., 13/15 points or 80/100 points). If a minor optional step lags in log propagation, check if you have already met the 80% threshold before spending extra time debugging
+13. Don't forget to read current README of each lab
 
 ---
 
