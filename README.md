@@ -20,7 +20,7 @@
 2. Open Antigravity on extracted directory (use Gemini 3.8 Flash (High) in Antigravity)
 3. Open Chrome and open Google Skills
 4. Start the lab
-5. After lab started successfully remain on the same skills lab where there are instructions and give login details
+5. After lab started successfully remain on the same skills lab where there are instructions and login details
 6. Open Ask Gemini on Chrome and share the tab with it
 7. Use Gemini 3.6 Flash
 8. Give prompt exactly this:
